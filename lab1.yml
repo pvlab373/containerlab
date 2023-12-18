@@ -1,0 +1,55 @@
+name: lab1
+mgmt:
+  network: lab
+  ipv4-subnet: 10.100.0.0/16
+
+topology:
+  nodes:
+    spine-1:
+      kind: ceos
+      image: ceos:4.30.4m
+      mgmt-ipv4: 10.100.1.1
+
+    spine-2:
+      kind: ceos
+      image: ceos:4.30.4m
+      mgmt-ipv4: 10.100.1.2
+
+    leaf-1:
+      kind: ceos
+      image: ceos:4.30.4m
+      mgmt-ipv4: 10.100.1.51
+
+    leaf-2:
+      kind: ceos
+      image: ceos:4.30.4m
+      mgmt-ipv4: 10.100.1.52
+
+    leaf-3:
+      kind: ceos
+      image: ceos:4.30.4m
+      mgmt-ipv4: 10.100.1.53
+
+    leaf-4:
+      kind: ceos
+      image: ceos:4.30.4m
+      mgmt-ipv4: 10.100.1.54
+
+  links:
+    # - endpoints: ["spine-1:eth1", "spine-2:eth1"]
+    # - endpoints: ["spine-1:eth2", "spine-2:eth2"]
+    # - endpoints: ["leaf-1:eth1", "spine-1:eth3"]
+    # - endpoints: ["leaf-1:eth2", "spine-2:eth3"]
+    # - endpoints: ["leaf-2:eth1", "spine-1:eth4"]
+    # - endpoints: ["leaf-2:eth2", "spine-2:eth4"]
+
+    - endpoints: ["spine-1:eth11", "spine-2:eth11"]
+    - endpoints: ["spine-1:eth12", "spine-2:eth12"]
+    - endpoints: ["leaf-1:eth1", "spine-1:eth1"]
+    - endpoints: ["leaf-1:eth2", "spine-2:eth1"]
+    - endpoints: ["leaf-2:eth1", "spine-1:eth2"]
+    - endpoints: ["leaf-2:eth2", "spine-2:eth2"]
+    - endpoints: ["leaf-3:eth1", "spine-1:eth3"]
+    - endpoints: ["leaf-3:eth2", "spine-2:eth3"]
+    - endpoints: ["leaf-4:eth1", "spine-1:eth4"]
+    - endpoints: ["leaf-4:eth2", "spine-2:eth4"]

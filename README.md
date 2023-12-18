@@ -1,1 +1,3 @@
 # containerlab
+
+--keep-mgmt-net
