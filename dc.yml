@@ -1,0 +1,100 @@
+name: dc-topology
+
+mgmt:
+  network: mgmt
+  ipv4-subnet: 10.10.1.0/24
+
+topology:
+  kinds:
+    ceos:
+      image: ceos:4.30.5m
+
+  nodes:
+    # DC-A Nodes
+    dca-spine1:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.101
+      cpu: 0.5
+      memory: 1g
+    dca-spine2:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.102
+      cpu: 0.5
+      memory: 1g
+    dca-leaf1:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.103
+      cpu: 0.5
+      memory: 1g
+    dca-leaf2:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.104
+      cpu: 0.5
+      memory: 1g
+    dca-edgeleaf1:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.105
+      cpu: 0.5
+      memory: 1g
+    dca-edgeleaf2:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.106
+      cpu: 0.5
+      memory: 1g
+
+    # DC-B Nodes
+    dcb-spine1:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.201
+      cpu: 0.5
+      memory: 1g
+    dcb-spine2:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.202
+      cpu: 0.5
+      memory: 1g
+    dcb-leaf1:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.203
+      cpu: 0.5
+      memory: 1g
+    dcb-leaf2:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.204
+      cpu: 0.5
+      memory: 1g
+    dcb-edgeleaf1:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.205
+      cpu: 0.5
+      memory: 1g
+    dcb-edgeleaf2:
+      kind: ceos
+      mgmt-ipv4: 10.10.1.206
+      cpu: 0.5
+      memory: 1g
+
+  links:
+    # Links within DC-A
+    - endpoints: ["dca-spine1:eth1", "dca-leaf1:eth1"]
+    - endpoints: ["dca-spine1:eth2", "dca-leaf2:eth1"]
+    - endpoints: ["dca-spine1:eth3", "dca-edgeleaf1:eth1"]
+    - endpoints: ["dca-spine1:eth4", "dca-edgeleaf2:eth1"]
+    - endpoints: ["dca-spine2:eth1", "dca-leaf1:eth2"]
+    - endpoints: ["dca-spine2:eth2", "dca-leaf2:eth2"]
+    - endpoints: ["dca-spine2:eth3", "dca-edgeleaf1:eth2"]
+    - endpoints: ["dca-spine2:eth4", "dca-edgeleaf2:eth2"]
+
+    # Links within DC-B
+    - endpoints: ["dcb-spine1:eth1", "dcb-leaf1:eth1"]
+    - endpoints: ["dcb-spine1:eth2", "dcb-leaf2:eth1"]
+    - endpoints: ["dcb-spine1:eth3", "dcb-edgeleaf1:eth1"]
+    - endpoints: ["dcb-spine1:eth4", "dcb-edgeleaf2:eth1"]
+    - endpoints: ["dcb-spine2:eth1", "dcb-leaf1:eth2"]
+    - endpoints: ["dcb-spine2:eth2", "dcb-leaf2:eth2"]
+    - endpoints: ["dcb-spine2:eth3", "dcb-edgeleaf1:eth2"]
+    - endpoints: ["dcb-spine2:eth4", "dcb-edgeleaf2:eth2"]
+
+    # Links between DC-A and DC-B
+    - endpoints: ["dca-spine1:eth5", "dcb-spine1:eth5"]
+    - endpoints: ["dca-spine2:eth5", "dcb-spine2:eth5"]
